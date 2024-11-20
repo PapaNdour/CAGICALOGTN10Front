@@ -1,0 +1,1394 @@
+/* Variables CSS */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #008CBA;
+    --accent-color: #ffa500;
+    --danger-color: #ff4444;
+    --text-color: #333;
+    --background-color: #f0f0f0;
+    --card-background: #ffffff;
+    --border-radius: 8px;
+    --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --transition: all 1s ease;
+    --spacing: 20px;
+    --family-header-bg: #4CAF50;
+    --family-header-text: white;
+    --family-border: #e0e0e0;
+}
+
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+   /* scroll-padding-top: var(--scroll-padding, 50px);*/
+
+}
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    /*padding: var(--spacing);*/
+    padding: 5px;
+    width: 100%;
+}
+
+/* En-tête */
+header {
+    background-color: var(--primary-color);
+    background-image: url(https://www.ikonet.com/fr/ikonet-ui/images/2013/blu_banner_top.jpg);
+    background-size: cover; /* Permet à l'image de remplir tout le conteneur */
+    background-position: center; /* Centre l'image dans le conteneur */
+
+
+    color: white;
+    padding: 2px;
+    text-align: center;
+    position: relative;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.logo {
+    position: absolute;
+    left: var(--spacing);
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: 85px;
+    border-radius: var(--border-radius);
+}
+
+.contact{
+    font-size: 0.7rem;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.top-h2{
+    color:rgb(242, 245, 174);
+}
+
+/* Navigation */
+nav {
+    background-color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+
+}
+
+nav.sticky {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--primary-color);
+    background: #FFF url(https://www.ikonet.com/fr/ikonet-ui/images/footerback.jpg) center repeat-x;
+}
+
+/* Dans votre fichier styles.css */
+main {
+    transition: padding-top 0.3s ease;
+}
+
+nav.sticky + main {
+    padding-top: var(--nav-height, 0px);
+}
+
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav ul li {
+    padding: 1px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bolder;
+    margin: 10px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button-sticky {
+    background-color: #fefefee9;
+    color: rgb(4, 4, 4);
+}
+
+.button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.button:active {
+    transform: translateY(1px);
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Grille de photos */
+.photo-grid {
+    /*display: grid;*/
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing);
+    /*margin-top: var(--spacing);*/
+    margin-top: 5px;
+}
+
+.photo-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid #444;*/
+}
+
+
+
+
+
+.photo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.photo-image-container {
+    position: relative;
+    padding-top: 100%; /* Ratio 1:1 */
+    overflow: hidden;
+    border-radius: calc(var(--border-radius) - 2px);
+    background-color: #f8f8f8;
+
+    width: 100%;
+    height: 100%;
+    object-fit: containcover; /* Affiche l'image en entier dans son cadre */
+
+}
+
+.photo-image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.photo-image-container img:hover {
+    transform: scale(1.05);
+}
+
+.photo-checkbox {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+
+.photo-info p {
+    margin: 2px 0;
+    font-size: 0.9rem;
+}
+
+/* Conteneur principal des actions */
+.photo-actions {
+    display: flex;
+    margin-top: 1px;
+    padding: 5px;
+    background-color: var(--background-color);
+}
+/* Actions sur la photo */
+
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1002;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: var(--card-background);
+    margin: 5% auto;
+    padding: var(--spacing);
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    margin-bottom: var(--spacing);
+}
+
+.close {
+    position: absolute;
+    /*right: var(--spacing);
+    top: var(--spacing);*/
+    right: 28px;
+    top: 16px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close:hover {
+    color: var(--text-color);
+}
+
+/* Formulaires */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: calc(var(--border-radius) / 2);
+    font-size: 1rem;
+}
+
+.form-group input[type="file"] {
+    padding: 10px 0;
+}
+
+.photo-preview {
+    max-width: 100%;
+    max-height: 300px;
+    margin-top: 10px;
+    border-radius: var(--border-radius);
+    display: none;
+}
+
+/* Modal de choix client */
+.payment-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing);
+    margin-bottom: var(--spacing);
+}
+
+.payment-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.selected-photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: var(--spacing);
+}
+
+.selected-photo-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.selected-photo-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: calc(var(--border-radius) / 2);
+    margin-bottom: 5px;
+}
+
+/* Messages */
+.message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: var(--border-radius);
+    z-index: 1005;
+    display: none;
+    animation: slideIn 0.3s ease-out;
+    max-width: 80%;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+
+/*Famille bijoux--------------------------------------------------------------------------*/
+/* Ajout des styles pour le filtre de famille */
+.famille-filter {
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 0 var(--spacing);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/*.famille-filter label {
+    font-weight: bold;
+    color: var(--text-color);
+}*/
+
+
+/* Style pour le groupe de photos par famille */
+/*
+.famille-group {
+    margin-bottom: 30px;
+}
+
+.famille-group-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.famille-group-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.famille-group-header .count {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+}
+
+.famille-group-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing);
+}
+*/
+
+
+/* Filtre de famille */
+.famille-filter {
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 0 var(--spacing);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.famille-filter label {
+    font-weight: bold;
+    /*color: var(--text-color);*/
+    color:rgb(242, 245, 174);
+}
+
+
+.header-top{
+    background-color:#f8f8f8;
+}
+
+.selected-photo-info {
+    
+    font-weight:normal;
+    font-size:0.8rem;
+    /*color: var(--text-color);*/
+    color:rgba(36, 41, 31, 0.859);
+}
+.p-info{
+    font-weight:bold;
+}
+.famille-filter select {
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd;
+    background-color: white;
+
+    font-size: 0.8rem;
+    font-weight: bolder;
+    
+    min-width: 200px;
+    cursor: pointer;
+}
+
+
+
+
+/* Conteneur principal des familles */
+.familles-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0.4rem;
+}
+
+/* Style pour chaque groupe de famille */
+.famille-group {
+    /* Ajuster l'espacement du groupe pour éviter les sauts */
+    position: relative;
+    margin-bottom: 20px;
+
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 10px;
+
+
+}
+
+/* En-tête de chaque groupe de famille */
+.famille-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.4rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.famille-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.famille-header .badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+}
+
+/* Grille de photos pour chaque famille */
+.famille-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 0.5rem;
+    background-color: var(--background-color);
+}
+
+
+/* Conteneur pour les en-têtes collants */
+.sticky-headers-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 998; /* Juste en dessous de la navigation */
+    pointer-events: none; /* Permet de cliquer à travers */
+}
+
+/* Style pour l'en-tête collant */
+.sticky-famille-header {
+
+
+    display: none;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.4rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    position: absolute;
+    width: 100%;
+    max-width: 1600px;
+    left: 50%;
+
+    position: absolute;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 2s ease;
+
+
+    
+}
+
+.sticky-famille-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.sticky-famille-header .badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**************************************************************************************/
+/* Style des items dans la grille */
+.photo-item {
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+.photo-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Container pour l'image */
+.photo-image-container {
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+    background-color: #f8f8f8;
+    width: 100%;
+    height: 100%;
+}
+
+.photo-image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-image-container img:hover {
+    transform: scale(1.05);
+}
+
+/* Checkbox de sélection */
+.photo-checkbox {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 2;
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+}
+
+/* Informations de la photo */
+.photo-info {
+    padding: 0.2rem;
+    flex-grow: 1;
+    margin-top: 1px;
+}
+
+.photo-famille{
+text-align: center;
+background-color: #F8F8F8;
+}
+
+.photo-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.photo-reference {
+    color: var(--text-color-light);
+    font-size: 0.9rem;
+}
+
+.photo-weight {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.photo-price {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+
+
+/*
+.photo-actions button {
+    flex: 1;
+}
+*/
+
+        /* Styles pour les boutons */
+        /*.button*/
+        /*.photo-actions button {
+            flex: 1; /* Pour que chaque bouton prenne le même espace /
+            min-width: 100px; /* Largeur minimale pour chaque bouton /
+            max-width: 200px;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+       }*/
+
+
+/* Style général des boutons */
+.photo-actions button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+
+/* Style spécifique pour chaque bouton */
+.button.edit-photo {
+    background-color: #ffa500;
+    color: white;
+}
+
+
+.button.delete-photo {
+    background-color: #ff4444;
+    color: white;
+}
+
+.button.view-photo {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Effets hover */
+.photo-actions button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+
+/* Conteneur des boutons */
+.button-container {
+    display: flex;
+    flex-direction:row;
+    gap: 5px;
+    width: 100%;
+}
+
+
+
+
+
+/*Famille bijoux Fin--------------------------------------------------------------------------*/
+
+
+
+
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+}
+
+.success-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid #2e7d32;
+}
+
+/* Loading */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1010;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Pied de page 
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: auto;
+}
+*/
+
+
+
+footer{
+    margin: 5px;
+    background-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    background-image: url(https://www.ikonet.com/fr/ikonet-ui/images/2013/blu_banner_top.jpg);
+    background-size: cover;
+
+
+
+}
+footer h3{
+    color: var(--violet);
+}
+footer p{
+    cursor: pointer;
+    color: #ccc;
+}
+footer p:hover{
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+/* Modal Photo Agrandie */
+#enlargedPhotoModal .modal-content {
+    padding: 10px;
+    max-width: 95%;
+    max-height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+#enlargedPhoto {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Media queries pour la réactivité */
+@media (max-width: 1200px) {
+    .sticky-famille-header {
+        max-width: 100%;
+        padding: 0.4rem calc(var(--spacing) + 1rem);
+        
+    }
+}
+
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction:column;
+        padding: 10px;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+        padding: 1px 0;
+    }
+
+    .button-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .photo-actions button {
+        flex: 1;
+        max-width: calc(33.33% - 4px);
+    }
+
+    .modal-content {
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
+
+    .payment-info {
+        flex-direction: column;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    .logo {
+        position: relative;
+        left: auto;
+        transform: none;
+        margin: 10px auto;
+        display: block;
+    }
+
+    .sticky-famille-header {
+        padding: 0.4rem 1rem;
+    }
+
+    /*
+    .famille-filter label {
+        display: none;  /* Cache le label pour les écrans < 768px //
+    }
+    */
+}
+
+@media (max-width: 480px) {
+    .photo-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .photo-actions {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+        margin: 1px 0;
+    }
+
+    #familleFilter {
+        width: 100%;
+        margin: 1px 0;
+        
+    }
+
+    .selected-photos {
+        grid-template-columns: 1fr;
+    }
+
+    .famille-header h2 {
+        margin: 0;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .famille-filter label {
+        display: none;  /* Cache le label pour les écrans < 768px */
+    }
+
+    footer{
+        justify-content: center;
+    }
+    footer .column{
+        width: 70%;
+    }
+
+}
+
+
+/* Pour les très petits écrans */
+@media (max-width: 320px) {
+    .photo-actions button {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    #familleFilter {
+        width: 50%;
+        margin: 1px 0;
+        
+    }
+
+    footer{
+        justify-content: center;
+    }
+    footer .column{
+        width: 20%;
+    }
+
+}
+
+/* Pour les très petits écrans */
+@media (max-width: 200px) {
+    .photo-actions button {
+        font-size: 0.5rem;
+        padding: 3px;
+    }
+
+    #familleFilter {
+        width: 30%;
+        margin: 1px 0;
+        
+    }
+    p{
+        text-size-adjust:inherit;
+    }
+    footer{
+        justify-content: center;
+    }
+    footer .column{
+        width: 10%;
+    }
+
+}
+
+/* Optimisations pour le mode sombre */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1a1a1a;
+        --card-background: #2d2d2d;
+        --text-color: #ffffff;
+    }
+
+    .modal {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+
+    input, select {
+        background-color: #333;
+        color: white;
+        border-color: #444;
+    }
+
+    .message {
+        background-color: #333;
+    }
+}
+
+/* Animations et transitions */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Styles pour les images en cours de chargement */
+.photo-image-container.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Styles pour les états d'erreur */
+.photo-image-container.error::after {
+    content: 'Erreur de chargement';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: var(--border-radius);
+}
+
+
+
+
+
+/* Optimisations pour les modals photo */
+#enlargedPhotoModal {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+#enlargedPhotoModal .modal-content {
+    background: transparent;
+    box-shadow: none;
+    text-align: center;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#enlargedPhotoModal .close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 40px;
+    z-index: 1003;
+}
+
+#enlargedPhoto {
+    max-width: 95vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 0;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Optimisations pour le formulaire de choix client */
+.payment-info {
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin: 15px 0;
+}
+
+.total-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.payment-duration {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+}
+
+/* Améliorations des contrôles de formulaire */
+.form-control {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-control input:focus,
+.form-control select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.form-control label {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: var(--card-background);
+    padding: 0 5px;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+}
+
+/* Styles pour les états de chargement des images Cloudinary */
+.cloudinary-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.cloudinary-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 100%
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Styles pour les images responsives de Cloudinary */
+.cloudinary-responsive {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; /* Ratio 1:1 */
+}
+
+.cloudinary-responsive img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Améliorations pour l'impression PDF */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    
+    #clientChoiceModal,
+    #clientChoiceModal * {
+        visibility: visible;
+    }
+    
+    #clientChoiceModal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    
+    .modal-content {
+        box-shadow: none;
+    }
+    
+    .close,
+    .print-hide {
+        display: none !important;
+    }
+}
+
+/* Styles des notifications toast */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1100;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast.success {
+    border-left: 4px solid var(--primary-color);
+}
+
+.toast.error {
+    border-left: 4px solid var(--danger-color);
+}
+
+/* Optimisations pour le mode sombre */
+@media (prefers-color-scheme: dark) {
+    .toast {
+        background: #333;
+        color: white;
+    }
+    
+    .payment-info {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .payment-duration {
+        background-color: #222;
+    }
+    
+    .form-control label {
+        background-color: var(--card-background);
+    }
+    
+    #enlargedPhotoModal {
+        background-color: rgba(0, 0, 0, 0.95);
+    }
+}
+
+/* Styles d'accessibilité améliorés */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Focus visible amélioré */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Styles pour les utilisateurs qui préfèrent réduire les animations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Utilitaires de mise en page */
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 2rem; }
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+.d-flex { display: flex; }
+.flex-column { flex-direction: column; }
+.justify-content-between { justify-content: space-between; }
+.align-items-center { align-items: center; }
+
+/* Styles pour les écrans très larges */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+/* Styles pour l'impression optimisée */
+@page {
+    size: A4;
+    margin: 2cm;
+}
+
+
+
+
+
+
+

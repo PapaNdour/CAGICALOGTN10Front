@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catalogue TontinOR - Bijouterie et joaillerie">
+    <title>Catalogue TontinOR</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Préchargement des polices et ressources critiques -->
+    <link rel="preconnect" href="https://res.cloudinary.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/images/Logo.png">
+
+
+    <style>
+        header {
+            background-color: var(--primary-color);
+            /* Supprimer l'image de fond externe */
+        }
+        
+        footer {
+            background-color: #0d3f7c;
+            color: #FFF;
+            /* Supprimer l'image de fond externe */
+        }
+    </style>
+
+
+</head>
+<body>
+    <header>
+        <!--<img src="/public/images/Logo.png" alt="Logo TontinOR" class="logo">-->
+        <img src="/images/Logo.png" alt="Logo TontinOR" class="logo" data-fallback="/images/fallback-image.jpg">
+        <h1>Catalogue TontinOR</h1>
+        <h2 class="top-h2">Colection 2024 - 2025</h2>
+    </header>
+
+    <nav>
+        <ul>
+            <li><button onclick="updateBasePrice()" class="button button-sticky">MAJ prix de base</button></li>
+            <li><button onclick="openModal('addPhotoModal')" class="button button-sticky">Ajouter une photo</button></li>
+            <li><button id="clientChoiceButton" onclick="openClientChoiceModal()" class="button" disabled>Choix client (0)</button></li>
+       
+            <div class="famille-filter">
+                <label for="familleFilter">Filtre : </label>
+                <select id="familleFilter" onchange="filterByFamille()">
+                    <option value="TOUS">Toutes les familles</option>
+                </select>
+            </div>
+           
+        </ul>
+
+           
+
+    </nav>
+
+
+
+
+
+    <main role="main">
+        <div class="container">
+            <div id="photoGrid" class="photo-grid">
+                <!-- Les photos seront injectées ici dynamiquement -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Ajout Photo -->
+     <!--
+    <div id="addPhotoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ajouter une nouvelle photo</h2>
+                <span class="close" onclick="closeModal('addPhotoModal')">&times;</span>
+            </div>
+            <form id="addPhotoForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="nom_photo">Nom de la photo:</label>
+                    <input type="text" id="nom_photo" name="nom_photo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reference">Référence:</label>
+                    <input type="text" id="reference" name="reference" required>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="newPhotoFamille">Famille :</label>
+                    <select id="newPhotoFamille" name="famille" required>
+                        <option value="">Sélectionnez une famille</option>
+                    </select>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="poids_bijou">Poids (en grammes):</label>
+                    <input type="number" id="poids_bijou" name="poids_bijou" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="photo">Photo:</label>
+                    <input type="file" id="photo" name="photo" accept="image/*" 
+                           onchange="previewImage(this, 'newPhotoPreview')" required>
+                    <img id="newPhotoPreview" class="photo-preview" style="display: none;">
+                </div>
+
+                <button type="submit" class="button">Ajouter</button>
+            </form>
+        </div>
+    </div>
+    -->
+
+<!-- Modal Ajout Photo -->
+<div id="addPhotoModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Ajouter une nouvelle photo</h2>
+            <span class="close" onclick="closeModal('addPhotoModal')">&times;</span>
+        </div>
+
+        <form id="addPhotoForm">
+
+            <div class="form-group">
+                <label for="newPhotoFamille">Famille :</label>
+                <select id="newPhotoFamille" 
+                        name="famille" 
+                        required>
+                    <option value="">Sélectionnez une famille</option>
+                    <!-- Les options seront ajoutées dynamiquement -->
+                </select>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <label for="newPhotoName">Nom de la photo :</label>
+                <input type="text" 
+                       id="newPhotoName" 
+                       name="nom_photo" 
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="newPhotoReference">Référence :</label>
+                <input type="text" 
+                       id="newPhotoReference" 
+                       name="reference" 
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="newPhotoWeight">Poids (en grammes) :</label>
+                <input type="number" 
+                       id="newPhotoWeight" 
+                       name="poids_bijou" 
+                       step="0.01" 
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="newPhotoFile">Photo :</label>
+                <input type="file" 
+                       id="newPhotoFile" 
+                       name="photo" 
+                       accept="image/*" 
+                       required 
+                       onchange="previewImage(this, 'newPhotoPreview')">
+                <div class="photo-preview-container">
+                    <img id="newPhotoPreview" 
+                         class="photo-preview" 
+                         alt="Aperçu de la photo"
+                         style="display: none;">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="button">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+    <!-- Modal Modification Photo -->
+    <div id="editPhotoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Modifier la photo</h2>
+                <span class="close" onclick="closeModal('editPhotoModal')">&times;</span>
+            </div>
+            <form id="editPhotoForm" enctype="multipart/form-data">
+                <input type="hidden" id="editPhotoId" name="photoId">
+                
+
+                <div class="form-group">
+                    <label for="editPhotoFamille">Famille :</label>
+                    <select id="editPhotoFamille" name="famille" required>
+                        <option value="">Sélectionnez une famille</option>
+                    </select>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label for="editPhotoName">Nom de la photo:</label>
+                    <input type="text" id="editPhotoName" name="nom_photo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPhotoReference">Référence:</label>
+                    <input type="text" id="editPhotoReference" name="reference" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="editPhotoWeight">Poids (en grammes):</label>
+                    <input type="number" id="editPhotoWeight" name="poids_bijou" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPhotoFile">Nouvelle photo (optionnel):</label>
+                    <input type="file" id="editPhotoFile" name="photo" accept="image/*" 
+                           onchange="previewImage(this, 'editPhotoPreview')">
+                    <img id="editPhotoPreview" class="photo-preview">
+                </div>
+
+                <button type="submit" class="button">Valider les changements</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Choix Client -->
+    <div id="clientChoiceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="header-top">
+                    <h2>Choix du client</h2>
+                    <span class="close" onclick="closeModal('clientChoiceModal')">&times;</span>
+                </div>
+
+                <div class="payment-info">
+                    <div class="total-price">
+                        Prix total: <span id="totalPrice">0</span> F CFA
+                    </div>
+
+                    <div class="payment-inputs">
+                        <div class="input-group">
+                            <label for="paymentAmount">Montant versé:</label>
+                            <input type="number" id="paymentAmount" min="0" step="1000">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="paymentPeriod">Versement:</label>
+                            <select id="paymentPeriod">
+                                <option value="daily">Jour</option>
+                                <option value="weekly">Semaine</option>
+                                <option value="monthly" selected>Mois</option>
+                                <option value="quarterly">Trimestre</option>
+                                <option value="semiannual">Semestre</option>
+                                <option value="annual">Annuel</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-duration">
+                    Temps estimé: <span id="paymentPlan"></span>
+                </div>
+            </div>
+
+            <div class="modal-scrollable-content">
+                <div class="selected-photos">
+                    <!-- Les photos sélectionnées seront injectées ici -->
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button onclick="generatePDF()" class="button">Imprimer en PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Photo Agrandie -->
+    <div id="enlargedPhotoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('enlargedPhotoModal')">&times;</span>
+            <img id="enlargedPhoto" alt="Photo agrandie">
+        </div>
+    </div>
+
+    <!-- Messages et Chargement -->
+    <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <p>Chargement...</p>
+    </div>
+
+    <div id="errorMessage" class="message error-message"></div>
+    <div id="successMessage" class="message success-message"></div>
+
+    <footer>
+        <p>&copy; 2024 TontinOR. Tous droits réservés.</p>
+    </footer>
+
+    <footer>
+        <div class="column">
+            <h3>Aide</h3>
+            <p>contatcc@contact.fdg</p>
+            <p>Contactez-nous</p>
+            <p>Comment acheter</p>
+        </div>
+        <div class="column">
+            <h3>Recrutement</h3>
+            <p>business@headboost</p>
+            <p>Postuler en ligne</p>
+            <p>Coment faire</p>
+        </div>
+        <div class="column">
+            <h3>Réseaux</h3>
+            <p>Facebook</p>
+            <p>Twitter</p>
+            <p>Linked</p>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Script de secours pour les images -->
+    <script>
+        function handleImageError(img) {
+            img.onerror = null;
+            img.src = '/public/uploads/fallback-image.jpg';
+        }
+    </script>
+</body>
+</html>
